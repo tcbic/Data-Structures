@@ -5,8 +5,12 @@ as well as its next node in the List."""
 class ListNode:
     def __init__(self, value, prev=None, next=None):
         self.value = value
+        # This is a pointer.
         self.prev = prev
+        # This is a pointer.
+        # If we just had this pointer, we would know that it's a singly linked list.
         self.next = next
+        # Two pointers indicate it's a doubly linked list.
 
     """Wrap the given value in a ListNode and insert it
     after this node. Note that this node could already
@@ -52,7 +56,22 @@ class DoublyLinkedList:
     as the new head of the list. Don't forget to handle 
     the old head node's previous pointer accordingly."""
     def add_to_head(self, value):
-        pass
+        # Make a new node.
+        new_node = ListNode(value, None, None)
+        # The length of the list increases by 1 when we add a new node.
+        self.length += 1
+        # If there is no head or tail, we know that the list must be empty.
+        # Therefore, the new node is the head and the tail.
+        if not self.head and not self.tail:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            # The current head becomes the new node's next node.
+            new_node.next = self.head
+            # The new node is before (previous) to the old head.
+            self.head.prev = new_node
+            # The new node is now the head of the list.
+            self.head = new_node
 
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
@@ -64,7 +83,22 @@ class DoublyLinkedList:
     as the new tail of the list. Don't forget to handle 
     the old tail node's next pointer accordingly."""
     def add_to_tail(self, value):
-        pass
+        # Make a new node.
+        new_node = ListNode(value, None, None)
+        # The length of the list increases by 1 when we add a new node.
+        self.length += 1
+        # If there is no head or tail, we know that the list must be empty.
+        # Therefore, the new node is the head and the tail.
+        if not self.head and not self.tail:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            # The current tail becomes the previous node.
+            new_node.prev = self.tail
+            # The next node from the old tail is now the new node.
+            self.tail.next = new_node
+            # The new node is now the tail of the list.
+            self.tail = new_node
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
