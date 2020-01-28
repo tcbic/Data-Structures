@@ -116,9 +116,6 @@ class DoublyLinkedList:
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
     def move_to_front(self, node):
-        if self.head == node:
-            return
-        else:
             value = node.value
             self.delete(node)
             self.add_to_head(value)
@@ -126,9 +123,6 @@ class DoublyLinkedList:
     """Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List."""
     def move_to_end(self, node):
-        if self.tail == node:
-            return
-        else:
             value = node.value
             self.delete(node)
             self.add_to_tail(value)
@@ -170,9 +164,12 @@ class DoublyLinkedList:
             return None
         else:
             max_value = self.head.value
-            current_val = self.head.next
+            current_val = self.head
             while current_val:
-                if current_val > max_value:
-                    max_value = current_val
+                # If current value is greater than the max value, we found a new 
+                # max value.
+                if current_val.value > max_value:
+                    max_value = current_val.value
+                # Move to the next value.
                 current_val = current_val.next
             return max_value
